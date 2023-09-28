@@ -46,13 +46,6 @@ brew install gh gum bat eza bottom gnupg
 # | Configure Shell |
 # ===================
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp ./custom.zsh ~/.custom.zsh
-echo "source ~/.custom.zsh" >> ~/.zshrc
-
-source ~/.zshrc
-
 # Github connect
 if [ -z "$GH_TOKEN" ]; then
     GH_TOKEN=$(gum input --placeholder "Github token" --password)
@@ -78,6 +71,7 @@ cp ./gitconfig ~/.gitconfig
 git config --global user.signingkey $GPG_KEY
 git config --global commit.gpgsign true
 
+gh ssh-key add ~/.ssh/id_ed25519.pub
 gh gpg-key add <(echo "$GPG_PUBLIC")
 
 # Configure vim
@@ -86,3 +80,22 @@ cp ./vimrc ~/.vimrc
 cp -r ./vim ~/.vim
 
 vim +PlugInstall +qall
+
+# As install is taking ownership of the shell
+# We need to install Oh My Zsh after
+
+# Shell Sub-configs
+
+mkdir -p ~/.zsh
+
+cp ./env.zsh ~/.zsh/env.zsh
+echo "export GH_TOKEN=$GH_TOKEN" >> ~/.zsh/env.zsh
+
+cp ./custom.zsh ~/.zsh/custom.zsh
+
+# Install Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "source ~/.zsh/env.zsh" >> ~/.zshrc
+echo "source ~/.zsh/custom.zsh" >> ~/.zshrc
+source ~/.zshrc
