@@ -1,0 +1,24 @@
+[alias]
+    st = status
+    lg = log --graph --oneline
+    le = log --stat --summary
+    cam = commit -am
+    c = commit -m
+    append = commit --amend --no-edit
+
+[user]
+    name = majortom327
+    email = me@valentin-thomas.com
+
+[commit]
+	gpgsign = true
+[pager]
+  branch = false
+[core]
+	ignorecase = false
+[safe]
+	directory = /opt/homebrew
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = false
