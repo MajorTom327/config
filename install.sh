@@ -39,8 +39,9 @@ brew install --cask docker brave-browser raycast arc
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Utils
+brew tap teamookla/speedtest
 brew install --cask obsidian protonvpn
-brew install gh gum bat eza bottom gnupg
+brew install gh gum bat eza bottom gnupg speedtest
 
 # ===================
 # | Configure Shell |
