@@ -83,7 +83,9 @@ gh gpg-key add <(echo "$GPG_PUBLIC")
 cp ./vimrc ~/.vimrc
 cp -r ./vim ~/.vim
 
-vim +PlugInstall +qall
+# vim +PlugInstall +qall
+yes | vim -c ':PlugInstall' \
+    -c 'qa!'
 
 # As install is taking ownership of the shell
 # We need to install Oh My Zsh after
