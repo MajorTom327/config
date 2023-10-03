@@ -71,7 +71,7 @@ GPG_PUBLIC=$(gpg --armor --export $GPG_KEY)
 cp ./.lldbinit ~/.lldbinit
 
 # Configure git
-cp ./gitconfig ~/.gitconfig
+cp ./.gitconfig ~/.gitconfig
 git config --global user.signingkey $GPG_KEY
 git config --global commit.gpgsign true
 
@@ -80,12 +80,12 @@ gh gpg-key add <(echo "$GPG_PUBLIC")
 
 # Configure vim
 
-cp ./vimrc ~/.vimrc
-cp -r ./vim ~/.vim
+cp ./.vimrc ~/.vimrc
+cp -r ./.vim ~/.vim
 
-# vim +PlugInstall +qall
-yes | vim -c ':PlugInstall' \
-    -c 'qa!'
+vim +PlugInstall +qall
+#yes | vim -c ':PlugInstall' \
+#    -c 'qa!'
 
 # As install is taking ownership of the shell
 # We need to install Oh My Zsh after
@@ -94,14 +94,11 @@ yes | vim -c ':PlugInstall' \
 
 mkdir -p ~/.zsh
 
-cp ./env.zsh ~/.zsh/env.zsh
+cp -r ./.zsh ~/.zsh
 echo "export GH_TOKEN=$GH_TOKEN" >> ~/.zsh/env.zsh
-
-cp ./custom.zsh ~/.zsh/custom.zsh
 
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "source ~/.zsh/env.zsh" >> ~/.zshrc
 echo "source ~/.zsh/custom.zsh" >> ~/.zshrc
 source ~/.zshrc
