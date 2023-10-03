@@ -67,6 +67,9 @@ GPG_KEY=$(gpg --list-secret-keys --keyid-format=long | grep -E -o 'ed25519/[0-9A
 
 GPG_PUBLIC=$(gpg --armor --export $GPG_KEY)
 
+# Configure LLDB
+cp ./.lldbinit ~/.lldbinit
+
 # Configure git
 cp ./gitconfig ~/.gitconfig
 git config --global user.signingkey $GPG_KEY

@@ -1,0 +1,4 @@
+settings set target.x86-disassembly-flavor intel
+settings set prompt "(lldb) "
+
+command alias leakdbg env MallocStackLogging=1
