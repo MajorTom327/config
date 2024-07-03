@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+COLOR="#2980b9"
+LABEL_LENGTH=$(tput cols)-7
+ 
+ARG_LENGTH=${#1}
+DASHES_COUNT=$(($LABEL_LENGTH - $ARG_LENGTH))
+DASHES=$(printf '%*s' "$DASHES_COUNT" | tr ' ' '-')
+
+MARGIN="1 0"
+if [ -z "$1" ]
+then
+  DASHES=$(printf '%*s' "$DASHES_COUNT + 7" | tr ' ' '-')
+  gum style --margin $MARGIN --foreground $COLOR -- $DASHES
+  #"--------------------------------------------------------------------------------"
+else
+  LEFT=$(gum style --margin $MARGIN --foreground $COLOR -- "---[ ")
+  LABEL=$(gum style --margin $MARGIN --foreground "#FFFFFF" --bold "$1")
+
+  RIGHT=$(gum style --margin $MARGIN --foreground $COLOR -- " ]$DASHES")
+  gum join $LEFT $LABEL $RIGHT
+  #gum style --foreground "#2980b9" -- "---[ $CONTENT ]----------------------------------------------------------------"
+fi

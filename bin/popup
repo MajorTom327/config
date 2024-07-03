@@ -1,0 +1,40 @@
+#!/usr/bin/env zsh
+
+
+SIZE=$(echo "($(tput cols) - 7) / 3 - 2" | bc)
+MARGIN=$(echo "$SIZE + 2" | bc)
+
+default_color="#009432"
+
+#if [ -z "$2" ]; then
+#  color=${2:-$default_color}
+#else
+#  color=$2
+#fi
+
+color="#009432";
+variant=$2
+
+case $variant in 
+  success)
+    color="#009432"
+    ;;
+  warn)
+    color="#e67e22"
+    ;;
+  danger)
+    color="#c0392b"
+    ;;
+  *)
+    color="#3498db"
+    ;;
+esac
+
+
+gum style \
+	--foreground $color --border-foreground $color --border double \
+	--bold \
+	--margin "2 $MARGIN" \
+	--align center --width $SIZE --padding "1 2" \
+	$1
+
